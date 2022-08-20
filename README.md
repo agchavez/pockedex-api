@@ -19,7 +19,12 @@
   docker-compose up -d 
 ```
 
-## Stack 
+- Cargar data inicial
+```
+  {{url}}/api/v1/sped/?limit=100
+```
+
+## Stack V
 * nestjs
 * MongoDB
 
