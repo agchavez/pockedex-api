@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PockemonModule } from './pockemon/pockemon.module';
 import { CommonModule } from './common/common.module';
+import { SpedModule } from './sped/sped.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { CommonModule } from './common/common.module';
       useNewUrlParser: true,
     }),
     CommonModule,
+    SpedModule,
   ],
   controllers: [AppController],
   providers: [AppService],
