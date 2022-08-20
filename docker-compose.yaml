@@ -7,3 +7,24 @@ services:
             - ../data/db:/data/db
         environment:
             - MONGO_INITDB_DATABASE=test
+        networks:
+            - serve-network
+    app:
+        container_name: app
+        image: serve-dev:1.0.0
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - "8080:8080"
+        depends_on:
+            - mongodb
+        environment:
+            MONGO_URL: mongodb://mongodb:27017/dev
+            NODE_ENV: development
+            PORT: 8080
+            JWT_SECRET: "secret"
+        networks:
+            - serve-network
+networks:
+    serve-network:

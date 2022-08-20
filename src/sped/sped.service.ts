@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { PockeResponse } from '../../dist/sped/interface/pockeapi.interface';
 import { Pockemon } from '../pockemon/entities/pockemon.entity';
 import { AxiosAdapter } from '../common/adapters/axios.adapter';
+import { PockeResponse } from './interface/pockeapi.interface';
 
 @Injectable()
 export class SpedService {

@@ -31,3 +31,15 @@
 
 ## Documentacion 
 https://documenter.getpostman.com/view/11189605/VUqoRz8x
+
+
+## Produccion build
+
+1. Crer archivo .env.prod
+2. Llenar las variables de entorno:
+   ```
+      MONGO_URI=url de mongo
+      PORT=puerto en el que desea correr la aplicacion
+      JWT_SECRET= jwt de la aplicacion
+      DEFAULT_LIMIT= llimite de registros por pagina por defecto
+   ```
