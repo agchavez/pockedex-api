@@ -8,15 +8,18 @@ import { isValidObjectId, Model } from 'mongoose';
 import { CreatePockemonDto } from './dto/create-pockemon.dto';
 import { UpdatePockemonDto } from './dto/update-pockemon.dto';
 import { Pockemon } from './entities/pockemon.entity';
-import { PaginationDto } from '../common/dto/pagination.dto';
 import { FilterPockemonDto } from './dto/filter-pockemon.dto';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class PockemonService {
   constructor(
     @InjectModel(Pockemon.name)
     private readonly pockemonModel: Model<Pockemon>,
+    private readonly configService: ConfigService
   ) {}
+
+  private limitDefault: number = this.configService.get<number>('DEFAULT_LIMIT'); 
   async create(createPockemonDto: CreatePockemonDto) {
     if (await this.findOneByName(createPockemonDto.name)) {
       throw new BadRequestException('El nombre de pockemon ya existe');
@@ -32,7 +35,7 @@ export class PockemonService {
     }
   }
 
-  async findAll({ limit = 10, offset = 0, search }: FilterPockemonDto) {
+  async findAll({ limit = this.limitDefault, offset = 0, search }: FilterPockemonDto) {
     const [results, count] = await Promise.all([
       this.pockemonModel.find().skip(offset).limit(limit)
       .where({
@@ -47,7 +50,6 @@ export class PockemonService {
         },
       }),
     ]);
-
     return {
       results,
       count,

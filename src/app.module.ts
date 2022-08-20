@@ -5,11 +5,19 @@ import { AppService } from './app.service';
 import { PockemonModule } from './pockemon/pockemon.module';
 import { CommonModule } from './common/common.module';
 import { SpedModule } from './sped/sped.module';
+import { ConfigModule } from '@nestjs/config';
+import { EnvConfiguration } from './config/env.config';
+import { JoiValidation } from './config/joi.validation';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      load: [EnvConfiguration],
+      validationSchema: JoiValidation
+    }),
     PockemonModule,
-    MongooseModule.forRoot('mongodb://localhost:27017/pockemon', {
+    MongooseModule.forRoot(process.env.MONGO_URI,
+     {
       useNewUrlParser: true,
     }),
     CommonModule,
