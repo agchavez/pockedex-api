@@ -19,6 +19,23 @@
   docker-compose up -d 
 ```
 
-## Stack 
+- Load initial data
+```
+  {{url}}/api/v1/sped/?limit=100
+```
+
+## Stack V
 * nestjs
 * MongoDB
+
+## Produccion build
+
+1. Create file .env.prod
+2. Add the environment variables:
+   ```
+      MONGO_URI=
+      PORT=
+      JWT_SECRET= 
+      DEFAULT_LIMIT= 
+   ```
+
