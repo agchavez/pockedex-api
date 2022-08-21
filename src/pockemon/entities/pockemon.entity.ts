@@ -28,6 +28,18 @@ export class Pockemon extends Document{
         required: true,
     })
     number: number;
+
+    @Prop({
+        required: false,
+        default: "",
+    })
+    urlImage: string;
+    
+    @Prop({
+        required: false,
+        default: "",
+    })
+    dream_world: string;
     
 }
 

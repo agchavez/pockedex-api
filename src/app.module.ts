@@ -1,7 +1,5 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { PockemonModule } from './pockemon/pockemon.module';
 import { CommonModule } from './common/common.module';
 import { SpedModule } from './sped/sped.module';
@@ -23,7 +21,5 @@ import { JoiValidation } from './config/joi.validation';
     CommonModule,
     SpedModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

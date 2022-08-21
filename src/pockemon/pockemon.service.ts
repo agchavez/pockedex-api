@@ -36,19 +36,17 @@ export class PockemonService {
   }
 
   async findAll({ limit = this.limitDefault, offset = 0, search }: FilterPockemonDto) {
+    const query = search ? { name: { $regex: search, $options: 'i' } } : {};
+    console.log(query);
     const [results, count] = await Promise.all([
       this.pockemonModel.find().skip(offset).limit(limit)
-      .where({
-        name: {
-          $regex: search,
-        },
-      })
+      .where(
+        query
+      )
       .sort({ number: 1 }),
-      this.pockemonModel.countDocuments().where({
-        name: {
-          $regex: search,
-        },
-      }),
+      this.pockemonModel.countDocuments().where(
+        query
+      ),
     ]);
     return {
       results,
