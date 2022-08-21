@@ -3,18 +3,18 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Ambiente de desarrollo
+## Developer
 
-- Clonar el repositorio 
-- Ejecutar 
+- clone repository 
+- Execute 
 ```
   yarn install
 ```
-- Tener el CLI de nest instalado 
+- Nest CLI 
 ```
   npm i -g @nest/cli
 ```
-- Levantar la base de datos con docker 
+- Run mongoDB with Docker 
 ```
   docker-compose up -d 
 ```
