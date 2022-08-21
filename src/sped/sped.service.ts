@@ -3,7 +3,10 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Pockemon } from '../pockemon/entities/pockemon.entity';
 import { AxiosAdapter } from '../common/adapters/axios.adapter';
-import { PockeResponse } from './interface/pockeapi.interface';
+import {
+  InfoPockeResponse,
+  PockeResponse,
+} from './interface/pockeapi.interface';
 
 @Injectable()
 export class SpedService {
@@ -18,16 +21,35 @@ export class SpedService {
     const data = await this.axios.get<PockeResponse>(
       `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=0`,
     );
-    const listPokemon: any[] = [];
-    data.results.forEach((result) => {
-      const number: number = +result.url.split('/')[6];
-      listPokemon.push({
-        number,
-        name: result.name,
-      });
-    });
-
-    await this.pockemonModel.insertMany(listPokemon);
-    return `Se cargaron ${listPokemon.length} pokemons`;
+    
+    //Obtener los datos de cada pockemon
+    const pockemons = await Promise.all(
+      data.results.map(async (pockemon) => {
+        const number: number = +pockemon.url.split('/')[6];
+        const {sprites} = await this.axios.get<InfoPockeResponse>(
+          pockemon.url,
+        );
+        return {
+          name: pockemon.name,
+          urlImage: sprites.front_default,
+          dream_world: sprites.other?.dream_world.front_default,
+          number,
+        };
+      }),
+    );
+    // const listPokemon: any[] = [];
+    // data.results.forEach((result) => {
+    //   const number: number = +result.url.split('/')[6];
+    //   const { sprites } = await this.axios.get<InfoPockeResponse>(
+    //     'https://pokeapi.co/api/v2/pokemon/' + number,
+    //   );
+    //   listPokemon.push({
+    //     number,
+    //     name: result.name,
+    //     urlImage: sprites.front_default,
+    //   });
+    // });
+    await this.pockemonModel.insertMany(pockemons);
+    return `Se cargaron ${pockemons.length} pokemons`;
   }
 }
