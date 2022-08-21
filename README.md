@@ -3,23 +3,23 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Ambiente de desarrollo
+## Developer
 
-- Clonar el repositorio 
-- Ejecutar 
+- clone repository 
+- Execute 
 ```
   yarn install
 ```
-- Tener el CLI de nest instalado 
+- Nest CLI 
 ```
   npm i -g @nest/cli
 ```
-- Levantar la base de datos con docker 
+- Run mongoDB with Docker 
 ```
   docker-compose up -d 
 ```
 
-- Cargar data inicial
+- Load initial data
 ```
   {{url}}/api/v1/sped/?limit=100
 ```
@@ -28,18 +28,14 @@
 * nestjs
 * MongoDB
 
-
-## Documentacion 
-https://documenter.getpostman.com/view/11189605/VUqoRz8x
-
-
 ## Produccion build
 
-1. Crer archivo .env.prod
-2. Llenar las variables de entorno:
+1. Create file .env.prod
+2. Add the environment variables:
    ```
-      MONGO_URI=url de mongo
-      PORT=puerto en el que desea correr la aplicacion
-      JWT_SECRET= jwt de la aplicacion
-      DEFAULT_LIMIT= llimite de registros por pagina por defecto
+      MONGO_URI=
+      PORT=
+      JWT_SECRET= 
+      DEFAULT_LIMIT= 
    ```
+
